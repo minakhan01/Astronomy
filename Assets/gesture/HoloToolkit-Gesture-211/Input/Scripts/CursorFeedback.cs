@@ -106,7 +106,7 @@ namespace Academy.HoloToolkit.Unity
                 pathingDetectedGameObject.SetActive(false);
                 return;
             }
-
+            Debug.Log("path detected");
             pathingDetectedGameObject.SetActive(true);
         }
 

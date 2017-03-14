@@ -21,7 +21,6 @@ public class GestureAction : MonoBehaviour
 
     private void PerformRotation()
     {
-        Debug.Log("PerformRotation");
         if (GestureManager.Instance.IsNavigating && HandsManager.Instance.FocusedGameObject == gameObject)
         {
             Debug.Log("GestureManager.Instance.IsNavigating && HandsManager.Instance.FocusedGameObject == gameObject");

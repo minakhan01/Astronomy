@@ -22,15 +22,15 @@ public class AstronautManager : Singleton<AstronautManager>
         keywordCollection = new Dictionary<string, KeywordAction>();
 
         // Add keyword to start manipulation.
-        keywordCollection.Add("Move Astronaut", MoveAstronautCommand);
+        keywordCollection.Add("Move Object", MoveAstronautCommand);
 
         /* TODO: DEVELOPER CODING EXERCISE 5.a */
 
         // 5.a: Add keyword Expand Model to call the ExpandModelCommand function.
-        keywordCollection.Add("Expand Model", ExpandModelCommand);
+        // keywordCollection.Add("Expand Model", ExpandModelCommand);
 
         // 5.a: Add keyword Reset Model to call the ResetModelCommand function.
-        keywordCollection.Add("Reset Model", ResetModelCommand);
+        // keywordCollection.Add("Reset Model", ResetModelCommand);
 
         // Initialize KeywordRecognizer with the previously added keywords.
         keywordRecognizer = new KeywordRecognizer(keywordCollection.Keys.ToArray());

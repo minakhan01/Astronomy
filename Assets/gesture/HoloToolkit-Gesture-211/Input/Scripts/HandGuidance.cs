@@ -78,7 +78,9 @@ namespace Academy.HoloToolkit.Unity
             float distanceFromCenter = (float)(hand.properties.sourceLossRisk * maxDistanceFromCenter);
 
             // Subtract direction from origin so that the indicator is between the hand and the origin.
-            position = IndicatorParent.transform.position - hand.properties.sourceLossMitigationDirection * distanceFromCenter;
+            Vector3 indicatorPostion = IndicatorParent.transform.position;
+            Vector3 lossMitigationPosition =  hand.properties.sourceLossMitigationDirection * distanceFromCenter;
+            position = indicatorPostion - lossMitigationPosition;
             rotation = Quaternion.LookRotation(Camera.main.transform.forward, hand.properties.sourceLossMitigationDirection);
         }
 
