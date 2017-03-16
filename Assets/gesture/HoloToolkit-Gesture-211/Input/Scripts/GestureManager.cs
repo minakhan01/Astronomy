@@ -5,7 +5,7 @@ namespace Academy.HoloToolkit.Unity
 {
     public class GestureManager : Singleton<GestureManager>
     {
-        // Tap and Navigation gesture recognizer.
+        // Tap and Navigation gesture recognizer. keeps track of bool IsNavagating
         public GestureRecognizer NavigationRecognizer { get; private set; }
 
         // Manipulation gesture recognizer.
