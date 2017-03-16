@@ -5,7 +5,7 @@ using UnityEngine;
 public class FixedPosition : MonoBehaviour {
 
     private Interpolator interpolator;
-    private float Distance = 2.0f;
+    private float Distance = 4.0f;
 
     private void Start()
     {
@@ -26,7 +26,12 @@ public class FixedPosition : MonoBehaviour {
 
         Transform cameraTransform = Camera.main.transform;
 
-        interpolator.SetTargetPosition(cameraTransform.position + (cameraTransform.forward * Distance));
+        interpolator.SetTargetPosition(cameraTransform.position + (cameraTransform.forward * Distance) + cameraTransform.up * 0.4f);
         interpolator.SetTargetRotation(Quaternion.LookRotation(-cameraTransform.forward, -cameraTransform.up));
+    }
+
+    private void Update()
+    {
+        
     }
 }

@@ -5,6 +5,8 @@ namespace Academy.HoloToolkit.Unity
 {
     public class GestureManager : Singleton<GestureManager>
     {
+        public GameObject sphere;
+
         // Tap and Navigation gesture recognizer. keeps track of bool IsNavagating
         public GestureRecognizer NavigationRecognizer { get; private set; }
 
@@ -64,7 +66,7 @@ namespace Academy.HoloToolkit.Unity
 
         private void Start()
         {
-            Transition(NavigationRecognizer);
+            Transition(ManipulationRecognizer);
         }
 
         void OnDestroy()
@@ -90,8 +92,8 @@ namespace Academy.HoloToolkit.Unity
         public void ResetGestureRecognizers()
         {
             // Default to the navigation gestures.
-            Transition(NavigationRecognizer);
-            Debug.Log("Transition(NavigationRecognizer);");
+            Transition(ManipulationRecognizer);
+            Debug.Log("Transition(ManipulationRecognizer);");
         }
 
         /// <summary>
@@ -165,6 +167,7 @@ namespace Academy.HoloToolkit.Unity
 
         private void ManipulationRecognizer_ManipulationStartedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
         {
+            Debug.Log("manipulation started");
             if (HandsManager.Instance.FocusedGameObject != null)
             {
                 IsManipulating = true;
@@ -172,11 +175,14 @@ namespace Academy.HoloToolkit.Unity
                 ManipulationPosition = position;
 
                 HandsManager.Instance.FocusedGameObject.SendMessageUpwards("PerformManipulationStart", position);
+
+                sphere.GetComponent<GestureInput>().updatePosition(position);
             }
         }
 
         private void ManipulationRecognizer_ManipulationUpdatedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
         {
+            Debug.Log("manipulation updated");
             if (HandsManager.Instance.FocusedGameObject != null)
             {
                 IsManipulating = true;
@@ -184,16 +190,21 @@ namespace Academy.HoloToolkit.Unity
                 ManipulationPosition = position;
 
                 HandsManager.Instance.FocusedGameObject.SendMessageUpwards("PerformManipulationUpdate", position);
+
+                sphere.GetComponent<GestureInput>().updatePosition(position);
             }
         }
 
         private void ManipulationRecognizer_ManipulationCompletedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
         {
+            Debug.Log("manipulation completed");
             IsManipulating = false;
+            sphere.GetComponent<GestureInput>().updateFinished(position);
         }
 
         private void ManipulationRecognizer_ManipulationCanceledEvent(InteractionSourceKind source, Vector3 position, Ray ray)
         {
+            Debug.Log("manipulation canceled");
             IsManipulating = false;
         }
 

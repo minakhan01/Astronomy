@@ -23,8 +23,8 @@ public class BallManager : MonoBehaviour
     void Start()
     {
 
-        ballStopped = false;
-        ball.SetActive(false);
+        //ballStopped = false;
+        //ball.SetActive(false);
         // cube.SetActive(false);
 
         keywordCollection = new Dictionary<string, KeywordAction>();
