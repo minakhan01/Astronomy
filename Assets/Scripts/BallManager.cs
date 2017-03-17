@@ -23,8 +23,8 @@ public class BallManager : MonoBehaviour
     void Start()
     {
 
-        //ballStopped = false;
-        //ball.SetActive(false);
+        ballStopped = false;
+        ball.SetActive(false);
         // cube.SetActive(false);
 
         keywordCollection = new Dictionary<string, KeywordAction>();
@@ -75,7 +75,7 @@ public class BallManager : MonoBehaviour
 
     public void StopBall()
     {
-        Time.timeScale = 0;
+        ball.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         ballStopped = true;
     }
 
@@ -87,7 +87,8 @@ public class BallManager : MonoBehaviour
 
     public void PlayBall()
     {
-        Time.timeScale = 1;
+        ball.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        // Time.timeScale = 1;
         ballStopped = false;
     }
 

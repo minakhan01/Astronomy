@@ -7,10 +7,12 @@ public class GestureInput : MonoBehaviour {
     private Vector3 position;
     public GameObject line;
     public GameObject ball;
+    private bool finishedUpdate;
+    private Vector3 forceVector;
 
     // Use this for initialization
     void Start() {
-
+        finishedUpdate = false;
     }
 
     // Update is called once per frame
@@ -23,10 +25,21 @@ public class GestureInput : MonoBehaviour {
         position = newPosition;
     }
 
+    private void FixedUpdate()
+    {
+        if (finishedUpdate)
+        {
+            ball.GetComponent<Rigidbody>().AddForce(forceVector, ForceMode.Force);
+            finishedUpdate = false;
+        }
+    }
+
     public void updateFinished(Vector3 newPosition)
     {
         position = newPosition;
-        Time.timeScale = 1;
-        ball.GetComponent<Rigidbody>().AddForce(new Vector3(position.x*10, position.y*10, 10*Mathf.Abs(position.z)), ForceMode.Force);
+        ball.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        finishedUpdate = true;
+        forceVector = new Vector3(position.x * 100, position.y * 100, 100 * Mathf.Abs(position.z));
+        //forceVector = new Vector3(0, 0, 10);
     }
 }
